@@ -11,10 +11,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-        useMaterial3: true,
-      ),
+      // theme: ThemeData(
+      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+      //   useMaterial3: true,
+      // ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -36,7 +36,6 @@ class StatBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 16),
       padding: const EdgeInsets.all(12),
       width: 100,
       height: 100,
@@ -90,11 +89,43 @@ class ActivityBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 28),
-      width: 350,
+      padding: const EdgeInsets.only(top: 21.5, left: 24, right: 57),
+      width: double.infinity, // Ocupa todo el ancho de la pantalla
       height: 100,
       decoration: BoxDecoration(
         color: Colors.blue,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(28),
+      ),
+      
+      // Content
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Prueba"),
+              Text("Prueba 2")
+            ],
+          ),
+          Column(
+            children: [
+              Container(
+                alignment: Alignment.center,
+                width: 71,
+                height: 30,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: const Text(
+                  "ACCIÓN",
+                  // ...
+                  )
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
@@ -114,36 +145,45 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: Text(widget.title),
         ),
-
+        
         body: Container(
-          margin: const EdgeInsets.all(20),
+          padding: const EdgeInsets.only(top: 60, left: 24, right: 24),
           // funciona también para --> padding: EdgeInsets.___
-          
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 children: [
-                  Container(
-                    alignment: Alignment.topLeft,
-                    child: const Text(
-                      "Inicio",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                    ),
+                  const Row(
+                    children: [
+                      Text(
+                        "Inicio",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold, 
+                          fontSize: 24,
+
+                        ),
+                      )
+                    ],
                   ),
-                  Container(
-                    alignment: Alignment.topLeft,
-                    margin: const EdgeInsets.only(top: 16),
-                    child: const Text(
-                      "Resumen",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
+                  const SizedBox(height: 16), // espacio entre filas
+                  const Row(
+                    children: [ 
+                      Text(
+                        "Resumen",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold, 
+                          fontSize: 18
+                        ),
+                      ),
+                    ]
                   ),
-                  
+                  const SizedBox(height: 16),
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
