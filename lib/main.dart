@@ -11,37 +11,37 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      // theme: ThemeData(
-      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-      //   useMaterial3: true,
-      // ),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+        useMaterial3: true,
+      ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class StatBox extends StatelessWidget {
-  final Icon icon;
-  final Text countText;
-  final Text subText;
+  final IconData iconData;
+  final String countText;
+  final String subText;
   
   const StatBox({
     // Required = obligatorio
-    required this.icon,
+    required this.iconData,
     required this.countText,
     required this.subText,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(12),
-      width: 100,
-      height: 100,
+      padding: const EdgeInsets.only(top: 12, bottom: 12, left: 12),
+      width: 115,
+      height: 105,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.25),
@@ -68,14 +68,14 @@ class StatBox extends StatelessWidget {
                   color: Color.fromARGB(255, 0, 94, 255),
                   size: 18,
                 ),
-                child: icon,
+                child: Icon(iconData),
               ),
           ),
           Text(
-            countText.data!,
+            countText,
             style: const TextStyle(fontWeight: FontWeight.bold ),
           ),
-          Text(subText.data!),
+          Text(subText),
         ],
       ),
     );
@@ -83,29 +83,49 @@ class StatBox extends StatelessWidget {
 }
 
 class ActivityBox extends StatelessWidget {
-  const ActivityBox({super.key});
+  
+  final Color colorBox;
+  final String channelText;
+  final String descText;
+  final String actionText;
+  final Color colorActionText;
+  
+  const ActivityBox({
+    required this.colorBox,
+    required this.channelText,
+    required this.descText,
+    required this.actionText,
+    required this.colorActionText,
+    super.key
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 28),
-      padding: const EdgeInsets.only(top: 21.5, left: 24, right: 57),
+      // margin: const EdgeInsets.only(top: 28),
+      padding: const EdgeInsets.only(top: 26, left: 24, right: 57),
       width: double.infinity, // Ocupa todo el ancho de la pantalla
-      height: 100,
+      height: 110,
       decoration: BoxDecoration(
-        color: Colors.blue,
-        borderRadius: BorderRadius.circular(28),
+        color: colorBox,
+        borderRadius: BorderRadius.circular(20),
       ),
       
       // Content
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Prueba"),
-              Text("Prueba 2")
+              Text(
+                channelText,
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              Text(
+                descText,
+                style: const TextStyle(fontSize: 13),
+              )
             ],
           ),
           Column(
@@ -118,9 +138,10 @@ class ActivityBox extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(24),
                 ),
-                child: const Text(
-                  "ACCIÓN",
-                  // ...
+                child: 
+                  Text(
+                    actionText,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color:  colorActionText)
                   )
               ),
             ],
@@ -146,20 +167,20 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(widget.title),
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        //   title: Text(widget.title),
+        // ),
         
         body: Container(
           padding: const EdgeInsets.only(top: 60, left: 24, right: 24),
           // funciona también para --> padding: EdgeInsets.___
-          child: Column(
+          child: const Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 children: [
-                  const Row(
+                  Row(
                     children: [
                       Text(
                         "Inicio",
@@ -171,8 +192,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       )
                     ],
                   ),
-                  const SizedBox(height: 16), // espacio entre filas
-                  const Row(
+                  SizedBox(height: 16), // espacio entre filas
+                  Row(
                     children: [ 
                       Text(
                         "Resumen",
@@ -183,35 +204,46 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ]
                   ),
-                  const SizedBox(height: 16),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                         StatBox(
-                          icon: Icon(IconData(0xf05a5, fontFamily: 'MaterialIcons')),
-                          countText: Text('3.950'),
-                          subText: Text('Rtas. gen.'),
+                          iconData: IconData(0xf05a5, fontFamily: 'MaterialIcons'),
+                          countText: "3.950",
+                          subText: "Rtas. gen.",
                         ),
                         StatBox(
-                          icon: Icon(IconData(0xe332, fontFamily: 'MaterialIcons')),
-                          countText: Text('1.000'),
-                          subText: Text('Img. gen.'),
+                          iconData: IconData(0xe332, fontFamily: 'MaterialIcons'),
+                          countText: "1.000",
+                          subText: "Img. gen.",
                         ),
-                        StatBox(
-                          icon: Icon(IconData(0xe35c, fontFamily: 'MaterialIcons')),
-                          countText: Text('15'),
-                          subText: Text('Trad. real.'),
-                        ),
-                      
                     ],
                   ),
-
+                  SizedBox(height: 33),
                   Column(
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      for (int i = 0; i < 3; i++) const ActivityBox()
+                      // for (int i = 0; i < 3; i++) const ActivityBox()
+                      ActivityBox(
+                        colorBox: Color.fromARGB(255, 254, 246, 234),
+                        channelText: "Canal de texto",
+                        descText: "Chatea con la IA",
+                        actionText: "CHATEÁ",
+                        colorActionText: Color.fromARGB(160, 94, 3, 1),
+                      ),
+                      SizedBox(height: 33),
+                      ActivityBox(
+                        colorBox: Color.fromARGB(255, 240, 240, 255),
+                        channelText: "Canal de imagen",
+                        descText: "Chatea desde imágenes",
+                        actionText: "CREÁ",
+                        colorActionText: Color.fromARGB(255, 1, 115, 203),
+                      ),
+                      SizedBox(height: 33),
                     ],
                   )
+                  
                 ],
               ),
             ],
