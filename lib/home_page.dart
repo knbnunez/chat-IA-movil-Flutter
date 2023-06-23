@@ -146,11 +146,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        //   title: Text(widget.title),
-        // ),
-        
         body: Container(
           padding: const EdgeInsets.only(top: 60, left: 24, right: 24),
           // funciona también para --> padding: EdgeInsets.___
