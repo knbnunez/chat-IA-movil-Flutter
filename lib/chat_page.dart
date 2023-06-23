@@ -98,9 +98,10 @@ class _ChatPageState extends State<ChatPage> {
               const StateBar(),
 
               Expanded(
-                  child: ListView(
-                children: messages.map((e) => Text(e)).toList(),
-              )),
+                child: ListView(
+                  children: messages.map((e) => Text(e)).toList()
+                )
+              ),
 
               // ------------ //
               //   inputText  //
@@ -130,6 +131,8 @@ class _ChatPageState extends State<ChatPage> {
                   ),
                 ),
               )
-            ])));
+            ])
+          )
+        );
   }
 }
