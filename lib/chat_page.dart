@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo_app/custom_widgets/text_message.dart';
 
 class StateBar extends StatelessWidget {
   // final title String;
@@ -76,7 +77,12 @@ class StateBar extends StatelessWidget {
   }
 }
 
+class TextMessage {
+  final String text;
+  final bool isUser;
 
+  TextMessage(this.text, this.isUser);
+}
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -85,23 +91,40 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  List<String> messages = [];
+  List<TextMessage> messages = [];
+
+  TextEditingController textFieldController = TextEditingController();
+
+  void sendUserMsgToAI(userMessage) {
+    setState(() {
+      messages.add(TextMessage(userMessage, false));
+    });
+  }
+
+  // Encapsulamos el setState que usábamos para guardar los mensajes en la lista
+  void addUserMessage(String message) {
+    setState(() {
+      messages.add(TextMessage(message, true));
+    });
+    sendUserMsgToAI(message); // Ahora mismo esta llamada a la función sólo sirve para duplicar lo que ingresa el usuario y replicarlo como si fuera el bot.
+  }
 
   @override
   Widget build(BuildContext context) {
-    var textFieldController = TextEditingController();
-
     return Scaffold(
         body: Container(
             padding: const EdgeInsets.only(top: 45, left: 20, right: 20),
             child: Column(children: [
               const StateBar(),
 
-              //  En el de Leo, esto fue modificado para poder encapsular los textos en un container (que terminó siendo un nuevo widget) con estilo de usuario.
               Expanded(
                 child: ListView(
-                  children: messages.map((e) => Text(e)).toList()
-                )
+                  children: messages
+                      .map((txtMsg) => txtMsg.isUser
+                          ? UserTextMessage(message: txtMsg.text)
+                          : AiTextMessage(message: txtMsg.text))
+                      .toList(),
+                ),
               ),
 
               Row(
@@ -126,9 +149,7 @@ class _ChatPageState extends State<ChatPage> {
                         child: TextField(
                           controller: textFieldController,
                           onSubmitted: (value) {
-                            setState(() {
-                              messages.add(value);
-                            });
+                            addUserMessage(textFieldController.text);
                             textFieldController.clear();
                           },
                           decoration: const InputDecoration(
@@ -148,9 +169,7 @@ class _ChatPageState extends State<ChatPage> {
                         borderRadius: BorderRadius.circular(50)),
                     child: IconButton(
                       onPressed: () {
-                        setState(() {
-                          messages.add(textFieldController.text);
-                        });
+                        addUserMessage(textFieldController.text);
                         textFieldController.clear();
                       },
                       icon: const Icon(Icons.send),
@@ -164,5 +183,3 @@ class _ChatPageState extends State<ChatPage> {
         );
   }
 }
-
-
