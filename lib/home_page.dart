@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo_app/services/analityc_storage_service.dart';
 
 // ------------------------------------ //
 // COMPONENTES
@@ -139,11 +140,26 @@ class ActivityBox extends StatelessWidget {
 // ------------------------------------ //
 // PRINCIPAL
 // ------------------------------------ //
-class HomePage extends StatelessWidget {
-   const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int textResponsesCount = 0;
 
   @override
   Widget build(BuildContext context) {
+    //
+    getTextResponsesCount().then((value) => {
+      if (value != textResponsesCount) {
+        setState(() {
+          textResponsesCount = value;
+        })
+      }
+    });
 
     return Scaffold(
         body: Container(
@@ -179,15 +195,15 @@ class HomePage extends StatelessWidget {
                     ]
                   ),
                   const SizedBox(height: 16),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                         StatBox(
-                          iconData: IconData(0xf05a5, fontFamily: 'MaterialIcons'),
-                          countText: "3.950",
+                          iconData: const IconData(0xf05a5, fontFamily: 'MaterialIcons'),
+                          countText: textResponsesCount.toString(),
                           subText: "Rtas. gen.",
                         ),
-                        StatBox(
+                        const StatBox(
                           iconData: IconData(0xe332, fontFamily: 'MaterialIcons'),
                           countText: "1.000",
                           subText: "Img. gen.",
