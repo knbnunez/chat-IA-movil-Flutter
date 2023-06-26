@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo_app/custom_widgets/text_message.dart';
+import 'package:flutter_demo_app/data/ia_response.dart';
+import 'package:flutter_demo_app/services/ia_service.dart';
+import 'package:flutter_demo_app/widgets/text_message.dart';
 
 class StateBar extends StatelessWidget {
   // final title String;
@@ -95,9 +97,10 @@ class _ChatPageState extends State<ChatPage> {
 
   TextEditingController textFieldController = TextEditingController();
 
-  void sendUserMsgToAI(userMessage) {
+  void sendUserMsgToAI(userMessage) async {
+    IaResponse response = await sendQuestionToChat(userMessage);
     setState(() {
-      messages.add(TextMessage(userMessage, false));
+      messages.add(TextMessage(response.mensaje, false));
     });
   }
 
@@ -106,7 +109,7 @@ class _ChatPageState extends State<ChatPage> {
     setState(() {
       messages.add(TextMessage(message, true));
     });
-    sendUserMsgToAI(message); // Ahora mismo esta llamada a la función sólo sirve para duplicar lo que ingresa el usuario y replicarlo como si fuera el bot.
+    // sendUserMsgToAI(message); // Ahora mismo esta llamada a la función sólo sirve para duplicar lo que ingresa el usuario y replicarlo como si fuera el bot.
   }
 
   @override
