@@ -10,5 +10,5 @@ Future<int> getTextResponsesCount() async {
 void incrementTextResponsesCount() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   int currentCount = await getTextResponsesCount();
-  prefs.setInt(_kTextResponsesCount, (currentCount++)); // aumentamos en 1 la cantidad de respuestas
+  prefs.setInt(_kTextResponsesCount, (currentCount+1)); // aumentamos en 1 la cantidad de respuestas
 }

@@ -103,6 +103,8 @@ class _ChatPageState extends State<ChatPage> {
     setState(() {
       messages.add(TextMessage(response.mensaje, false));
     });
+    // print("Estoy por realizar el icrementTextResponsesCount");
+    incrementTextResponsesCount();
   }
 
   // Encapsulamos el setState que usábamos para guardar los mensajes en la lista
@@ -110,7 +112,7 @@ class _ChatPageState extends State<ChatPage> {
     setState(() {
       messages.add(TextMessage(message, true));
     });
-    // sendUserMsgToAI(message); // Ahora mismo esta llamada a la función sólo sirve para duplicar lo que ingresa el usuario y replicarlo como si fuera el bot.
+    sendUserMsgToAI(message);
   }
 
   @override
