@@ -40,7 +40,7 @@ class _ImagePageState extends State<ImagePage> {
                       setState(() {
                         //update UI
                         // Habría que agregarlo a un array de fotos con estilo,
-                        // como hice con los textos
+                        // como hicimos con los textos
                       });
                   }),
               MaterialButton(
@@ -53,7 +53,7 @@ class _ImagePageState extends State<ImagePage> {
                       setState(() {
                         //update UI
                         // Habría que agregarlo a un array de fotos con estilo,
-                        // como hice con los textos
+                        // como hicimos con los textos
                       });
                   }),
               
