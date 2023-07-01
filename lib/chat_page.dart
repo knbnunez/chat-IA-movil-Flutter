@@ -3,82 +3,7 @@ import 'package:flutter_demo_app/data/ia_response.dart';
 import 'package:flutter_demo_app/services/analityc_storage_service.dart';
 import 'package:flutter_demo_app/services/ia_service.dart';
 import 'package:flutter_demo_app/widgets/text_message.dart';
-
-class StateBar extends StatelessWidget {
-  // final title String;
-  
-  const StateBar({
-    // required this.title,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(context, '/');
-          },
-          child: const Icon(
-            size: 20,
-            IconData(
-              0xf571,
-              fontFamily: 'MaterialIcons', 
-              matchTextDirection: true
-            ),
-          )
-        ),
-        const SizedBox(width: 32),
-        Container(
-            width: 50,
-            height: 50,
-            margin: const EdgeInsets.only(right: 24),
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(31, 3, 146, 255),
-              borderRadius: BorderRadius.circular(24),
-            ),
-
-            // Solo para test
-            child: const Icon(
-              IconData(0xf05a5, fontFamily: 'MaterialIcons'),
-              size: 30,
-              color: Color.fromARGB(255, 0, 139, 208),
-            )),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "Canal de texto",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-            const SizedBox(height: 3),
-            Row(
-              children: [
-                Container(
-                  width: 8,
-                  height: 8,
-                  margin: const EdgeInsets.only(right: 5),
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 47, 255, 120),
-                    borderRadius: BorderRadius.circular(24),
-                  ),
-                ),
-                const Text(
-                  "Siempre activo",
-                  style: TextStyle(
-                      fontSize: 13,
-                      color: Color.fromARGB(255, 85, 85, 85)),
-                )
-              ],
-            )
-          ],
-        ), 
-      ],
-    );
-  }
-}
+import 'package:flutter_demo_app/state_bar.dart';
 
 class TextMessage {
   final String text;
@@ -121,7 +46,10 @@ class _ChatPageState extends State<ChatPage> {
         body: Container(
             padding: const EdgeInsets.only(top: 45, left: 20, right: 20),
             child: Column(children: [
-              const StateBar(),
+              const StateBar(
+                title: "Canal de texto",
+                icon: IconData(0xf05a5, fontFamily: 'MaterialIcons'),
+              ),
 
               Expanded(
                 child: ListView(
