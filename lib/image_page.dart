@@ -14,8 +14,8 @@ class ImagePage extends StatefulWidget {
 }
 
 class _ImagePageState extends State<ImagePage> {
-    ImagePicker picker = ImagePicker();
-    XFile? image;
+  ImagePicker picker = ImagePicker();
+  XFile? image;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +27,6 @@ class _ImagePageState extends State<ImagePage> {
                 title: "Canal de imágenes",
                 icon: IconData(0xf5ec, fontFamily: 'MaterialIcons'),
               ),
-              
-              // const SizedBox(height: 40),
               
               MaterialButton(
                   color: Colors.blue,
